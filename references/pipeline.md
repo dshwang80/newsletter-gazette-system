@@ -10,12 +10,12 @@
 ## 산출물
 - 리포트: 볼트 '02. Research/독성 동향/{발행월} 독성학 저널 동향.md' + docx(변환: /home/dshwang/.hermes/profiles/kain_news/scripts/tox_report_md2docx.py).
 - 수집 JSON 누적: cron/data/toxicology_trends.json (월별 collected·journals·clusters·methods·regulatory_mentions 병합).
-- GAZETTE md: /mnt/c/dshwang/kain_article/GAZETTE_독성동향_{YYYY-MM}.md
+- TIDE md: /mnt/c/dshwang/kain_article/TIDE_독성동향_{YYYY-MM}.md
 
-## GAZETTE 조립 절차(월별 반복)
+## TIDE 조립 절차(월별 반복)
 1. 수집 후 papers_{yymm}.json(139편 등)를 스크래치에 저장 → 셀러스터 12개·6선 후보( 직전호 게재 DOI 0중복) 도출.
 2. md 6단 구조: 표지 인용구→브리핑→시그널 심화→클러스터 표→6선 카드→발행 각주.
-3. 빌드: python3 gazette_docx_build.py --md GAZETTE_독성동향_2026-10.md (QA 리포트 정식 계수는 빌드 본체, --verify 단독=0 표기 특성).
+3. 빌드: python3 gazette_docx_build.py --md TIDE_독성동향_2026-11.md (QA 리포트 정식 계수는 빌드 본체, --verify 단독=0 표기 특성).
 4. 배포 3처(구조=SKILL.md): 복사는 execute_code 사용 — 터미널 cp한글 경로·인용·직렬화 채널 불신뢰.
 5. 해시 3처 대조로 배포 검증.
 

@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-gazette_docx_build.py — GAZETTE 독성동향 소식지 md → docx 빌드 스크립트
+gazette_docx_build.py — NEB TIDE 소식지 md → docx 빌드 스크립트
 
 용법:
     python3 gazette_docx_build.py            # 변환 + 검증(QA 리포트) 모두 수행
     python3 gazette_docx_build.py --verify   # QA 리포트만 출력 (기존 .docx 대상)
 
-스크립트 위치에서 GAZETTE_독성동향_*.md 를 자동으로 찾는다.
+스크립트 위치에서 TIDE_독성동향_*.md 를 자동으로 찾는다. (2026-09/10호는 레거시 GAZETTE_ 접두어 — --md 로 직접 지정)
 출력 .docx 는 md 와 동일 파일명(확장자만 .docx).
-디자인 토큰은 GAZETTE_독성동향_DESIGN.md 에 의거(primary #3B8FB7 등).
+디자인 토큰은 GAZETTE_독성동향_DESIGN.md 에 의거(= TIDE 디자인 시스템, name: NEB TIDE)(primary #3B8FB7 등).
 """
 
 import argparse
@@ -63,7 +63,7 @@ HEADER_LINE_COLOR = "86CCEC"
 HEADER_MARGIN_TOP_TWIPS = "1247"
 HEADER_MARGIN_HEADER_TWIPS = "397"
 
-MD_GLOB = "GAZETTE_독성동향_*.md"
+MD_GLOB = "TIDE_독성동향_*.md"
 
 # ---------------------------------------------------------------------------
 # 저수준 헬퍼
@@ -236,7 +236,7 @@ def get_cell_fill(cell):
 
 
 def find_md(script_dir):
-    """스크립트 위치에서 GAZETTE_독성동향_*.md 자동 검색(최신 mtime 우선)."""
+    """스크립트 위치에서 TIDE_독성동향_*.md 자동 검색(최신 mtime 우선). 2026-09/10호 레거시 GAZETTE_ 접두어는 --md 로 지정."""
     candidates = sorted(
         script_dir.glob(MD_GLOB),
         key=lambda p: p.stat().st_mtime,
@@ -961,7 +961,7 @@ def print_report(rep):
     def mark(ok):
         return "PASS" if ok else "FAIL"
 
-    print("=== GAZETTE docx QA 리포트 ===")
+    print("=== NEB TIDE docx QA 리포트 ===")
     print(f"파일: {rep['docx_path']}")
     print("[구조] "
           f"h2(파티션)={s.get('h2', 0)} h3={s.get('h3', 0)} "
@@ -1009,11 +1009,11 @@ def ensure_content_types(docx_path: str) -> None:
 
 def main(argv=None):
     parser = argparse.ArgumentParser(
-        description="GAZETTE 독성동향 소식지 md → docx 빌드")
+        description="NEB TIDE 소식지 md → docx 빌드")
     parser.add_argument("--verify", action="store_true",
                         help="QA 리포트만 출력 (기존 .docx 대상)")
     parser.add_argument("--md", default=None,
-                        help="빌드할 소식지 md 경로 (기본: 스크립트 폴더에서 GAZETTE_독성동향_*.md 최신)")
+                        help="빌드할 소식지 md 경로 (기본: 스크립트 폴더에서 TIDE_독성동향_*.md 최신)")
     args = parser.parse_args(argv)
 
     script_dir = Path(__file__).resolve().parent
@@ -1039,7 +1039,7 @@ def main(argv=None):
     # 변환
     md_text = md_path.read_text(encoding="utf-8")
     month_title = parse_month_title(md_path)
-    topic_m = re.match(r"GAZETTE_(.+)_\d{4}-\d{2}", md_path.stem)
+    topic_m = re.match(r"(?:TIDE|GAZETTE)_(.+)_\d{4}-\d{2}", md_path.stem)
     topic_label = topic_m.group(1) if topic_m else "독성동향"
     stats_text = extract_cover_stats(md_text)
     logo_path = resolve_logo(md_path)

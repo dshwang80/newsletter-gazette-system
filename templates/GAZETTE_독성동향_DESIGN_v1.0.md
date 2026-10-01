@@ -1,6 +1,6 @@
 ---
 version: "1.0 (2026-10-01)"
-name: NEB-Gazette
+name: NEB TIDE
 description: 독성학 저널 동향 소식지 전용 디자인 시스템. kain_sp2 전향 지침서 디자인 양식(POPS 토큰형 YAML + Components + Do/Don't)의 편집 스타일을 계승하되, 소식지 스케일(A4 편면 4쪽 내외, 월간 요약형)에 맞춰 재정의한 것 — 지침서 양식 복제 아님.
 docx_spec: DESIGN_report.md(후향 지침서 docx 사양)의 페이지·폰트·검증 항목 구조를 소식지 규모로 축소·변형해 차용.
 source_of_truth:

@@ -1,9 +1,9 @@
 ---
 name: gazette-tox-10-build
-description: Use when GAZETTE 소식지(독성·환경) 제작 — md 조립→DOCX 빌드→3처 배포 절차.
+description: Use when NEB TIDE 소식지(독성·환경) 제작 — md 조립→DOCX 빌드→3처 배포 절차.
 ---
 
-# GAZETTE 소식지 제작 절차 (2026-10호 실증)
+# NEB TIDE 소식지 제작 절차 (2026-10호 GAZETTE 표기까지 실증 — 이후 TIDE)
 
 ## 발행 규칙
 - 컷: 발행월 1일에 하는 당월호 = 직전월까지 데이터 (10월호 컷 = 9/30).
